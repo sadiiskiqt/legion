@@ -33,24 +33,21 @@ class UserService extends UserRepository
                 return redirect('home');
                 //TODO img Error
                 //TODO Show Error if comment and image is empty!!!!
-            } else {
-
-                dd($this->oValidateFormService->validateFileUpload($oRequest));
-
-
+            } elseif (is_array($this->oValidateFormService->validateComment($oRequest)) && array_key_exists('comment_error', $this->oValidateFormService->validateComment($oRequest))) {
+                //Save Comment
                 $this->addUserComment(
                     $oRequest->input('upload_from'),
                     $this->oValidateFormService->validateComment($oRequest)
                 );
                 $this->getCommentId()->id;
-
                 //TODO save image and comment
-//                $this->oValidateFormService->validateComment($oRequest);
-//                $this->oValidateFormService->validateFileUpload($oRequest);
-
                 \Session::flash('flash_message', 'Успешна публикация');
                 return redirect('home');
             }
+
+            //Todo save the file in the database!!!!!
+            //TODO And List all the data on the front
+
         }
     }
 }

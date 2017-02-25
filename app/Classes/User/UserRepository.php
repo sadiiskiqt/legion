@@ -28,6 +28,9 @@ class UserRepository
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function getCommentId()
     {
         return \DB::table($this->sCommentTable)->orderBy('id', 'desc')->first();
