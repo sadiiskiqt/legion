@@ -28,13 +28,24 @@
     <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
         <img src="{{ URL::asset('public/img/asd.jpg') }}" alt="Avatar" class="w3-left w3-circle w3-margin-right"
              style="width:60px">
-        <span class="w3-right w3-opacity">{{$aResult->updated_at}}</span>
+        <span class="w3-right w3-opacity">{{substr($aResult->updated_at, 0, -3)}}</span>
         <h4>Angie Jane</h4><br>
-        @if(!empty($aResult->sOriginalName))
-           <a href="#">
-               <img src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}" style="width:100%"
-                    class="w3-margin-bottom">
-           </a>
+
+        @if(!empty($aResult->sOriginalName) && $aResult->sMimeType == 'video/mp4')
+
+            <video style="width:100%" controls>
+                <source src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}"
+                        type="video/mp4">
+                <source src="mov_bbb.ogg" type="video/ogg">
+                Your browser does not support HTML5 video.
+            </video>
+
+        @endif
+        @if(!empty($aResult->sOriginalName) && $aResult->sMimeType != 'video/mp4')
+            <a href="#">
+                <img src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}" style="width:100%"
+                     class="w3-margin-bottom">
+            </a>
         @endif
         <hr class="w3-clear">
 
@@ -43,10 +54,10 @@
         @endif
 
 
-        <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like
-        </button>
-        <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment
-        </button>
+        {{--<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like--}}
+        {{--</button>--}}
+        {{--<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment--}}
+        {{--</button>--}}
     </div>
 
 @endforeach

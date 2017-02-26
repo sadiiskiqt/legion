@@ -17,7 +17,7 @@ class CreateCommentTable extends Migration
             $table->increments('id');
             $table->integer('userId', false, true)->length(1);
             $table->text('userComment', false, true)->length(500);
-            $table->string('sOriginalName', 15);
+            $table->string('sOriginalName');
             $table->string('sMimeType', 10);
             $table->string('sPath', 10);
             $table->integer('delete', false, true)->length(1);
