@@ -34,17 +34,18 @@ class FileService
                 return $aError;
             } else {
                 //Generate new save name for the file
-                $sFileName = $this->generateFileName($_FILES['fileUpload']['name']);
+//                $sFileName = $this->generateFileName($_FILES['fileUpload']['name']);
+
                 //Create File Folder
                 $this->createFolder();
                 //Save File in the folder
-                move_uploaded_file($_FILES['fileUpload']['tmp_name'][0], $this->sPath . '/' . $sFileName);
+                move_uploaded_file($_FILES['fileUpload']['tmp_name'][0], $this->sPath . '/' . $_FILES['fileUpload']['name'][0]);
                 return $aFileUpload = array(
-                    'sFileName' => $sFileName,
+                    'sFileName' => $_FILES['fileUpload']['name'],
                     'sFileType' => $_FILES['fileUpload']['type'],
                     'sFileTmp' => $_FILES['fileUpload']['tmp_name'],
                     'sFileSize' => $_FILES['fileUpload']['size'],
-                    'sPath' => $this->sPath,
+                    'sPath' => date('Y'),
                 );
             }
         } else {

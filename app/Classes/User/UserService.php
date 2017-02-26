@@ -22,32 +22,55 @@ class UserService extends UserRepository
 
     public function userPost(Request $oRequest)
     {
+
         $aRules = array('upload_from' => 'Required');
         $oValidate = \Validator::make($oRequest->all(), $aRules);
         if (!$oValidate->passes()) {
             \Session::flash('post_errors', 'За да публикувате в сайта трябва първо да влезете!');
             return redirect('home');
         } else {
-            if (is_array($this->oValidateFormService->validateComment($oRequest)) && array_key_exists('comment_error', $this->oValidateFormService->validateComment($oRequest))) {
+
+            if (empty($this->oValidateFormService->validateComment($oRequest)) && $this->oValidateFormService->validateFileUpload($oRequest) == false) {
+                \Session::flash('form_errors',
+                    'Моля Добавете Коментар с Минимален брои символи(2). Максимален брои символи (500).
+                     Или качете снимки, клип, gif. В следния формат - mp4,3gp,jpeg,png,jpg,gif!');
+                return redirect('home');
+            }
+            $aFile = ($this->oValidateFormService->validateFileUpload($oRequest) != false) ? $this->oValidateFormService->validateFileUpload($oRequest) : array();
+
+            $iUserId = $oRequest->input('upload_from');
+            if (!empty(strlen($this->oValidateFormService->validateComment($oRequest))) > 500) {
                 \Session::flash('form_errors', 'Минимален брои символи(2). Максимален брои символи (500)!');
                 return redirect('home');
                 //TODO img Error
                 //TODO Show Error if comment and image is empty!!!!
-            } elseif (is_array($this->oValidateFormService->validateComment($oRequest)) && array_key_exists('comment_error', $this->oValidateFormService->validateComment($oRequest))) {
-                //Save Comment
-                $this->addUserComment(
-                    $oRequest->input('upload_from'),
-                    $this->oValidateFormService->validateComment($oRequest)
+            } elseif (!empty($this->oValidateFormService->validateComment($oRequest))) {  //Save Comment
+                //Save Comment to the database
+                $this->addUserPost(
+                    $iUserId,
+                    $this->oValidateFormService->validateComment($oRequest),
+                    $aFile
                 );
-                $this->getCommentId()->id;
+
                 //TODO save image and comment
                 \Session::flash('flash_message', 'Успешна публикация');
                 return redirect('home');
             }
 
-            //Todo save the file in the database!!!!!
-            //TODO And List all the data on the front
-
+            if ($this->oValidateFormService->validateFileUpload($oRequest) != false) {
+                $this->addUserPost(
+                    $iUserId,
+                    '',
+                    $aFile
+                );                //TODO save image and comment
+                \Session::flash('flash_message', 'Успешна публикация');
+                return redirect('home');
+            }
         }
+    }
+
+    public function getAllUserPost()
+    {
+        return $this->getPost();
     }
 }

@@ -42,6 +42,13 @@
 
     <div class="w3-card-2 w3-round w3-white w3-center">
         <div class="w3-container">
+            <img src="{{ URL::asset('public/img/sponsor/featured.png') }}" alt="Forest" style="width:100%;">
+        </div>
+    </div>
+    <br>
+
+    <div class="w3-card-2 w3-round w3-white w3-center">
+        <div class="w3-container">
             <p>Friend Request</p>
             <img src="{{ URL::asset('public/img/asd.jpg') }}" alt="Avatar" style="width:50%"><br>
             <span>Jane Doe</span>
