@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>MMaLegion.Com</title>
+<title>Спортен клуб ЛЕГИОНЪ - муай тай, кикбокс, мма, самозащита</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

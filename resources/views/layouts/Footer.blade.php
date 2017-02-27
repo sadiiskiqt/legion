@@ -1,10 +1,10 @@
 <!-- Footer -->
 <footer class="w3-container w3-theme-d3 w3-padding-16">
-    <h5>Footer</h5>
+    <h5>www.MmaLegion.com</h5>
 </footer>
 
 <footer class="w3-container w3-theme-d5">
-    <p>Powered by <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <p>Спортен клуб ЛЕГИОНЪ - муай тай, кикбокс, мма, самозащита</p>
 </footer>
 
 <script>
