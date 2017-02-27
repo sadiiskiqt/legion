@@ -31,7 +31,7 @@
         <span class="w3-right w3-opacity">{{substr($aResult->updated_at, 0, -3)}}</span>
         <h4>Angie Jane</h4><br>
 
-        @if(!empty($aResult->sOriginalName) && $aResult->sMimeType == 'video/mp4')
+        @if(!empty($aResult->sOriginalName) && $aResult->sMimeType == 'video/mp4' && $aResult->sMimeType == 'video/mp4')
 
             <video style="width:100%" controls>
                 <source src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}"

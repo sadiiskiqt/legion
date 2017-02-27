@@ -13,7 +13,7 @@
             mmaLegion.Com
         </div>
         <div class="w3-display-middle">
-            <h1 class="w3-jumbo w3-animate-top"><a href="home">Към Сайта</a></h1>
+            <h1 class="w3-jumbo w3-animate-top"><a href="legion">Към Сайта</a></h1>
             {{--<h1 class="w3-jumbo w3-animate-top"><a href="#">В процес на разработка</a></h1>--}}
         </div>
     </div>
