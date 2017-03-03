@@ -23,4 +23,5 @@ Route::post('/mypost', 'UserController@myPost');
 
 Route::get('/legion', 'UserController@legion');
 
+Route::get('/fbgallery', 'UserController@fbgallery');
 

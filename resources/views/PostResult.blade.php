@@ -25,15 +25,15 @@
 
 @foreach($aResults['aResults'] as $aResult)
 
-    <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
+    <div class="w3-container w3-card-2 w3-white w3-round w3-margin" ><br>
         <img src="{{ URL::asset('public/img/asd.jpg') }}" alt="Avatar" class="w3-left w3-circle w3-margin-right"
              style="width:60px">
         <span class="w3-right w3-opacity">{{substr($aResult->updated_at, 0, -3)}}</span>
-        <h4>Angie Jane</h4><br>
+        <h4>{{$aResult->name}}</h4><br>
 
         @if(!empty($aResult->sOriginalName) && $aResult->sMimeType == 'video/mp4' && $aResult->sMimeType == 'video/mp4')
 
-            <video style="width:100%" controls>
+            <video style="width:100%; max-height:500px;" controls>
                 <source src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}"
                         type="video/mp4">
                 <source src="mov_bbb.ogg" type="video/ogg">
@@ -43,7 +43,7 @@
         @endif
         @if(!empty($aResult->sOriginalName) && $aResult->sMimeType != 'video/mp4')
             <a href="#">
-                <img src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}" style="width:100%"
+                <img src="{{'storage/app/FileUpload/'.$aResult->sPath.'/'.$aResult->sOriginalName}}" style="width:100%; max-height:500px;"
                      class="w3-margin-bottom">
             </a>
         @endif

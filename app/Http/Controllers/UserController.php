@@ -45,4 +45,13 @@ class UserController extends Controller
     {
         return view('LegionData');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function fbgallery()
+    {
+        return view('fbgallery');
+
+    }
 }

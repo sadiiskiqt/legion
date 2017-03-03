@@ -1,3 +1,7 @@
+<?php
+header('Location: legion');
+exit();
+?>
 @extends('layouts.app')
 <style type="text/css">
     .bgimg {

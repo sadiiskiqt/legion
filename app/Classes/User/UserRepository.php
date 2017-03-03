@@ -49,8 +49,10 @@ class UserRepository
     protected function getPost()
     {
         return \DB::table($this->sCommentTable)
-            ->orderBy('id', 'desc')
-            ->where('delete', '==', 0)
+            ->join('users', $this->sCommentTable.'.userId', '=', 'users.id')
+
+            ->orderBy($this->sCommentTable.'.id', 'desc')
+            ->where($this->sCommentTable.'.delete', '==', 0)
             ->get();
         return $aResult = $oResult->toArray();
     }

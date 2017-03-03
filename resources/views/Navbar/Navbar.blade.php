@@ -16,6 +16,11 @@
                     Начало
                 </a>
             </li>
+            {{--<li class="w3-hide-small">--}}
+                {{--<a href="fbgallery" class="w3-padding-large w3-hover-white" title="News">--}}
+                    {{--FB Галерия--}}
+                {{--</a>--}}
+            {{--</li>--}}
             <li class="w3-hide-small">
                 <a href="home" class="w3-padding-large w3-hover-white" title="News">
                     <i class="fa fa-globe">
@@ -30,9 +35,15 @@
                     Начало
                 </a>
             </li>
+            {{--<li class="w3-hide-small">--}}
+                {{--<a href="fbgallery" class="w3-padding-large w3-hover-white" title="News">--}}
+                    {{--FB Галерия--}}
+                {{--</a>--}}
+            {{--</li>--}}
             <li class="w3-hide-small">
-                <a href="home" class="w3-padding-large w3-hover-white" title="News">
+                <a href="home" class="w3-padding-large w3-hover-white" title="Нови публикации">
                     <i class="fa fa-globe">
+                        Нови публикации
                     </i>
                 </a>
             </li>

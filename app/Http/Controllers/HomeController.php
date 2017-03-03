@@ -20,6 +20,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        dd($this->oUserService->getAllUserPost());
+
         $aResults = array(
             'aResults' => $this->oUserService->getAllUserPost(),
             'sPath' => storage_path() . '/app/FileUpload'
