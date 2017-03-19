@@ -23,7 +23,7 @@ class CreateMyprofileTable extends Migration
             $table->text('myProfileComment', false, true)->length(500);
             $table->string('sImageName');
             $table->string('sMimeType', 10);
-            $table->string('sPath',50);
+            $table->string('sPathProfile',50);
             $table->string('category', false, true)->length(50);
             $table->integer('delete', false, true)->length(1);
             $table->timestamps();

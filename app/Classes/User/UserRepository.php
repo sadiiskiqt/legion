@@ -60,6 +60,8 @@ class UserRepository
     {
         $oResult = \DB::table($this->sCommentTable)
             ->join('users', $this->sCommentTable . '.userId', '=', 'users.id')
+            ->join($this->sMyprofile, $this->sCommentTable . '.userId', '=', $this->sMyprofile . '.userId')
+
             ->orderBy($this->sCommentTable . '.id', 'desc')
             ->where($this->sCommentTable . '.delete', '==', 0)
             ->get();
@@ -130,7 +132,7 @@ class UserRepository
                     'myProfileComment' => $aUpdateData['sPath'],
                     'sImageName' => 'logo1.jpg',
                     'sMimeType' => 'img',
-                    'sPath' => $aUpdateData['sPath'],
+                    'sPathProfile' => $aUpdateData['sPath'],
                     'category' => $aUpdateData['category'],
                     'delete' => '0',
                     'created_at' => date("Y-m-d H:i:s"),
@@ -147,7 +149,7 @@ class UserRepository
                     'gender' => $aUpdateData['gender'],
                     'myProfileComment' => $aUpdateData['sPath'],
                     'sMimeType' => $aUpdateData['sFileType'],
-                    'sPath' => $aUpdateData['sPath'],
+                    'sPathProfile' => $aUpdateData['sPath'],
                     'category' => $aUpdateData['category'],
                     'delete' => '0',
                     'updated_at' => date("Y-m-d H:i:s")
@@ -183,7 +185,7 @@ class UserRepository
                 $this->sMyprofile . '.year',
                 $this->sMyprofile . '.gender',
                 $this->sMyprofile . '.sImageName',
-                $this->sMyprofile . '.sPath',
+                $this->sMyprofile . '.sPathProfile',
                 $this->sMyprofile . '.category',
                 $this->sMyprofile . '.sImageName',
                 $this->sUsers . '.name',
@@ -206,7 +208,8 @@ class UserRepository
         $oResult = \DB::table($this->sMyprofile)
             ->select(
                 $this->sMyprofile . '.sImageName',
-                $this->sUsers . '.name'
+                $this->sUsers . '.name',
+                $this->sUsers . '.id'
             )
             ->join($this->sUsers, $this->sMyprofile . '.userId', '=', $this->sUsers . '.id')
             ->orderBy($this->sMyprofile . '.id', 'desc')

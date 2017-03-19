@@ -8,7 +8,7 @@
             @if(!empty($aResults['oAllUserData']))
                 @foreach($aResults['oAllUserData'] as $aResults)
                     <section>
-                        <a href="">
+                        <a href="myprofile/{{$aResults->id}}/Спортен клуб ЛЕГИОНЪ Пловдив - муай тай, кикбокс, мма, самозащита">
                             <img src="{{ URL::asset('public/img/PersonImg/'.$aResults->sImageName) }}" style="width:25%"
                                  class="w3-margin-bottom">
                             <p style="float: right">{{$aResults->name}}</p>
