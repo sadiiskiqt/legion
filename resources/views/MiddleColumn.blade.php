@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 1300px; overflow-y: scroll;">
+    <div style="height: 1700px; overflow-y: scroll;">
         @include('PostResult')
     </div>
     <!-- End Middle Column -->

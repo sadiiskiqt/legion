@@ -72,4 +72,39 @@ class FileService
     }
 
 
+    public function validateUpdateMyProfileForm(Request $oRequest)
+    {
+//        dd($oRequest->all());
+        $aRules = array(
+            'person' => 'Required',
+            'updateProfileImage' => 'mimes:jpeg,png,jpg,gif',
+            'Name' => 'Max:100',
+        );
+        $oValidate = \Validator::make($oRequest->all(), $aRules);
+        if (!$oValidate->passes()) {
+            \Session::flash('post_errors', 'За да публикувате в сайта трябва първо да влезете!');
+            exit('Error');
+            return redirect('home');
+        } else {
+            $sPath = base_path().'/public/img/PersonImg';
+
+            move_uploaded_file($_FILES['updateProfileImage']['tmp_name'], $sPath . '/' . $_FILES['updateProfileImage']['name']);
+            return $aRequest = array(
+                'sFileName' => $_FILES['updateProfileImage']['name'],
+                'sFileType' => $_FILES['updateProfileImage']['type'],
+                'sFileTmp' => $_FILES['updateProfileImage']['tmp_name'],
+                'sFileSize' => $_FILES['updateProfileImage']['size'],
+                'Name' => $oRequest->input('Name'),
+                'DOBMonth' => $oRequest->input('DOBMonth'),
+                'DOBDay' => $oRequest->input('DOBDay'),
+                'DOBYear' => $oRequest->input('DOBYear'),
+                'gender' => $oRequest->input('gender'),
+                'category' => $oRequest->input('category'),
+                'person' => $oRequest->input('person'),
+                'sPath' => 'ProfileImages',
+            );
+        }
+    }
+
+
 }

@@ -69,8 +69,41 @@ class UserService extends UserRepository
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllUserPost()
     {
         return $this->getPost();
     }
+
+    /**
+     * @param Request $oRequest
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateMyProfile(Request $oRequest)
+    {
+        $aUpdateData = $this->oValidateFormService->validateUpdateMyProfileForm($oRequest);
+        $this->updateUserProfile($aUpdateData);
+        return redirect('myprofile/' . $aUpdateData['person'] . '/Спортен клуб ЛЕГИОНЪ Пловдив - муай тай, кикбокс, мма, самозащита');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMyProfileData()
+    {
+        return $this->getUserProfileData();
+    }
+
+    /**
+     * @param $iUserId
+     * @return mixed
+     */
+    public function getUserPostImages($iUserId)
+    {
+
+        return $this->getMyPostImages($iUserId);
+    }
+
 }

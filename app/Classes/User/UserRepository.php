@@ -23,6 +23,16 @@ class UserRepository
     protected $sImageFileTable = 'post_video_img';
 
     /**
+     * @var string
+     */
+    protected $sUsers = 'users';
+
+    /**
+     * @var string
+     */
+    protected $sMyprofile = 'myprofile';
+
+    /**
      * @param $iUserId
      * @param $sComment
      * @param array $aFile
@@ -48,11 +58,10 @@ class UserRepository
      */
     protected function getPost()
     {
-        return \DB::table($this->sCommentTable)
-            ->join('users', $this->sCommentTable.'.userId', '=', 'users.id')
-
-            ->orderBy($this->sCommentTable.'.id', 'desc')
-            ->where($this->sCommentTable.'.delete', '==', 0)
+        $oResult = \DB::table($this->sCommentTable)
+            ->join('users', $this->sCommentTable . '.userId', '=', 'users.id')
+            ->orderBy($this->sCommentTable . '.id', 'desc')
+            ->where($this->sCommentTable . '.delete', '==', 0)
             ->get();
         return $aResult = $oResult->toArray();
     }
@@ -84,6 +93,106 @@ class UserRepository
                 'updated_at' => date("Y-m-d H:i:s"),
             )
         );
+    }
+
+    /**
+     * @param $iUserId
+     * @return mixed
+     */
+    protected function getMyPostImages($iUserId)
+    {
+        $oResult = \DB::table($this->sCommentTable)
+            ->select('id', 'sOriginalName', 'sPath', 'sMimeType')
+            ->where('userId', $iUserId)
+            ->where('delete', 0)
+            ->where('sMimeType', '!=', 'video/mp4')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $aResult = $oResult->toArray();
+    }
+
+    /**
+     * @param array $aUpdateData
+     */
+    protected function updateUserProfile($aUpdateData = array())
+    {
+        $bUser = \DB::table($this->sMyprofile)->select('id')->where('userId', $aUpdateData['person'])->get()->toArray();
+
+        if (empty($bUser)) {
+            \DB::table($this->sMyprofile)->insert(
+                array(
+                    'userId' => $aUpdateData['person'],
+                    'day' => $aUpdateData['DOBDay'],
+                    'month' => $aUpdateData['DOBMonth'],
+                    'year' => $aUpdateData['DOBYear'],
+                    'gender' => $aUpdateData['gender'],
+                    'myProfileComment' => $aUpdateData['sPath'],
+                    'sImageName' => 'logo1.jpg',
+                    'sMimeType' => 'img',
+                    'sPath' => $aUpdateData['sPath'],
+                    'category' => $aUpdateData['category'],
+                    'delete' => '0',
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
+                )
+            );
+        } else {
+            \DB::table($this->sMyprofile)
+                ->where('id', $aUpdateData['person'])
+                ->update([
+                    'day' => $aUpdateData['DOBDay'],
+                    'month' => $aUpdateData['DOBMonth'],
+                    'year' => $aUpdateData['DOBYear'],
+                    'gender' => $aUpdateData['gender'],
+                    'myProfileComment' => $aUpdateData['sPath'],
+                    'sMimeType' => $aUpdateData['sFileType'],
+                    'sPath' => $aUpdateData['sPath'],
+                    'category' => $aUpdateData['category'],
+                    'delete' => '0',
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+        }
+
+        if (!empty($aUpdateData['sFileType'])) {
+            \DB::table($this->sMyprofile)
+                ->where('id', $aUpdateData['person'])
+                ->update([
+                    'sImageName' => $aUpdateData['sFileName'],
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+        }
+
+        \DB::table($this->sUsers)
+            ->where('id', $aUpdateData['person'])
+            ->update(['name' => $aUpdateData['Name']]);
+
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getUserProfileData()
+    {
+        $oResult = \DB::table($this->sMyprofile)
+            ->select(
+                $this->sMyprofile . '.day',
+                $this->sMyprofile . '.month',
+                $this->sMyprofile . '.year',
+                $this->sMyprofile . '.gender',
+                $this->sMyprofile . '.sImageName',
+                $this->sMyprofile . '.sPath',
+                $this->sMyprofile . '.category',
+                $this->sMyprofile . '.sImageName',
+                $this->sUsers . '.name',
+                $this->sUsers . '.email'
+
+            )
+            ->join($this->sUsers, $this->sMyprofile . '.userId', '=', $this->sUsers . '.id')
+            ->orderBy($this->sMyprofile . '.id', 'desc')
+            ->where($this->sMyprofile . '.delete', '==', 0)
+            ->get();
+        return $aResult = $oResult->toArray();
     }
 
 }

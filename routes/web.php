@@ -14,14 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
-Route::get('/myprofile', 'UserController@index');
+Route::get('/myprofile/{id}/Спортен клуб ЛЕГИОНЪ Пловдив - муай тай, кикбокс, мма, самозащита', 'UserController@index');
 Route::post('/mypost', 'UserController@myPost');
-
 Route::get('/legion', 'UserController@legion');
-
 Route::get('/fbgallery', 'UserController@fbgallery');
-
+Route::post('/my', 'UserController@myProfile');

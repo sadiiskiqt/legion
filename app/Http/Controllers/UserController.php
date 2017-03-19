@@ -24,9 +24,14 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($id)
     {
-        return view('user.MyProfile');
+        $aResults = array(
+            'aGetAllUserPostImages' => $this->oUserService->getUserPostImages($id),
+            'iPersonId' => $id,
+            'aPersonData' => $this->oUserService->getMyProfileData(),
+        );
+        return view('user.MyProfile')->with('aResults', $aResults);;
     }
 
     /**
@@ -53,5 +58,14 @@ class UserController extends Controller
     {
         return view('fbgallery');
 
+    }
+
+    /**
+     * @param Request $oRequest
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function myProfile(Request $oRequest)
+    {
+        return $this->oUserService->updateMyProfile($oRequest);
     }
 }
