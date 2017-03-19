@@ -26,9 +26,9 @@
 @foreach($aResults['aResults'] as $aResult)
     <?php $sProfileImage = (!empty($aResult->sImageName)) ? $aResult->sImageName : 'logo1.jpg'; ?>
     <div class="w3-container w3-card-2 w3-white w3-round w3-margin"><br>
-        <img src="{{ URL::asset('public/img/PersonImg/'.$aResult->sImageName) }}" alt="Avatar"
-             class="w3-left w3-circle w3-margin-right"
-             style="width:60px">
+        {{--<img src="{{ URL::asset('public/img/PersonImg/'.$sProfileImage) }}" alt="Avatar"--}}
+             {{--class="w3-left w3-circle w3-margin-right"--}}
+             {{--style="width:60px">--}}
         <span class="w3-right w3-opacity">{{substr($aResult->updated_at, 0, -3)}}</span>
         <h4>{{$aResult->name}}</h4><br>
 

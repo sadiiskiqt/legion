@@ -60,8 +60,7 @@ class UserRepository
     {
         $oResult = \DB::table($this->sCommentTable)
             ->join('users', $this->sCommentTable . '.userId', '=', 'users.id')
-            ->join($this->sMyprofile, $this->sCommentTable . '.userId', '=', $this->sMyprofile . '.userId')
-
+//            ->leftJoin($this->sMyprofile, 'users' . '.id', '=', $this->sMyprofile . '.userId')
             ->orderBy($this->sCommentTable . '.id', 'desc')
             ->where($this->sCommentTable . '.delete', '==', 0)
             ->get();
