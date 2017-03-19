@@ -174,6 +174,8 @@ class UserRepository
      */
     protected function getUserProfileData()
     {
+        $iProfile = (isset(\Auth::user()->id)) ? \Auth::user()->id : 0;
+
         $oResult = \DB::table($this->sMyprofile)
             ->select(
                 $this->sMyprofile . '.day',
@@ -191,8 +193,27 @@ class UserRepository
             ->join($this->sUsers, $this->sMyprofile . '.userId', '=', $this->sUsers . '.id')
             ->orderBy($this->sMyprofile . '.id', 'desc')
             ->where($this->sMyprofile . '.delete', '==', 0)
+            ->where($this->sMyprofile . '.userId', $iProfile)
             ->get();
         return $aResult = $oResult->toArray();
     }
+
+    /**
+     * @return mixed
+     */
+    protected function getAllUsers()
+    {
+        $oResult = \DB::table($this->sMyprofile)
+            ->select(
+                $this->sMyprofile . '.sImageName',
+                $this->sUsers . '.name'
+            )
+            ->join($this->sUsers, $this->sMyprofile . '.userId', '=', $this->sUsers . '.id')
+            ->orderBy($this->sMyprofile . '.id', 'desc')
+            ->where($this->sMyprofile . '.delete', '==', 0)
+            ->get();
+        return $aResult = $oResult->toArray();
+    }
+
 
 }

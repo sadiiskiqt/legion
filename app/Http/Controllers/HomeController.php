@@ -24,7 +24,9 @@ class HomeController extends Controller
 
         $aResults = array(
             'aResults' => $this->oUserService->getAllUserPost(),
-            'sPath' => storage_path() . '/app/FileUpload'
+            'sPath' => storage_path() . '/app/FileUpload',
+            'oProfileData' => $this->oUserService->getMyProfileData(),
+            'oAllUserData' => $this->oUserService->getAllUserData(),
         );
 
         return \View::make('home')->with('aResults', $aResults);

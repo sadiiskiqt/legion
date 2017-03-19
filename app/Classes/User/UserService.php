@@ -106,4 +106,8 @@ class UserService extends UserRepository
         return $this->getMyPostImages($iUserId);
     }
 
+    public function getAllUserData()
+    {
+        return $this->getAllUsers();
+    }
 }

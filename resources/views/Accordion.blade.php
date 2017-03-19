@@ -5,25 +5,17 @@
             <i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> Приятелите на ст.Легион
         </button>
         <div id="Demo1" class="w3-accordion-content w3-container">
-            <section>
-                <a href="">
-                    <img src="{{ URL::asset('public/img/asd.jpg') }}" style="width:25%" class="w3-margin-bottom">
-                    <p style="float: right">Aleksandar Stoilov</p>
-                </a>
-            </section>
-            <section>
-                <a href="">
-                    <img src="{{ URL::asset('public/img/asd.jpg') }}" style="width:25%" class="w3-margin-bottom">
-                    <p style="float: right">Aleksandar Stoilov</p>
-                </a>
-            </section>
-            <section>
-                <a href="">
-                    <img src="{{ URL::asset('public/img/asd.jpg') }}" style="width:25%" class="w3-margin-bottom">
-                    <p style="float: right">Aleksandar Stoilov</p>
-                </a>
-            </section>
-
+            @if(!empty($aResults['oAllUserData']))
+                @foreach($aResults['oAllUserData'] as $aResults)
+                    <section>
+                        <a href="">
+                            <img src="{{ URL::asset('public/img/PersonImg/'.$aResults->sImageName) }}" style="width:25%"
+                                 class="w3-margin-bottom">
+                            <p style="float: right">{{$aResults->name}}</p>
+                        </a>
+                    </section>
+                @endforeach
+            @endif
         </div>
         {{--<button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align">--}}
         {{--<i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events--}}

@@ -6,8 +6,8 @@
         {{ csrf_field() }}
 
         <p>Промяна на име: <br/>
-            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="<?= $sName?>"
-                   name="Name" value="<?= $sName?>">
+            <input class="w3-input w3-padding-16 w3-border" type="text" placeholder="{{ Auth::user()->name}}"
+                   name="Name" value="{{ Auth::user()->name}}">
         </p>
         <p>Кога сте родени? <br/>
             <select name="DOBMonth">
